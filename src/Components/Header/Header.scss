@@ -1,0 +1,52 @@
+$oceanBlue: #26abff;
+$lightGrey: #ececec;
+$standartRadius: 8px;
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 60px;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  background: $oceanBlue;
+  &__search {
+    display: flex;
+    min-width: 400px;
+    height: 40px;
+    background: #fff;
+    border-radius: $standartRadius;
+    &-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      svg {
+        width: 20px;
+        height: 20px;
+        fill: $oceanBlue;
+      }
+    }
+    &-field {
+      flex: calc(100% - 170px) 0 0;
+      padding: 0 20px;
+      border: none;
+      outline: none;
+    }
+    &-button {
+      border: none;
+      border-radius: 0 $standartRadius $standartRadius 0;
+      width: 100px;
+      outline: none;
+      color: $oceanBlue;
+      background: $lightGrey;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+}
