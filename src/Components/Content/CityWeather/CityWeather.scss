@@ -1,0 +1,122 @@
+$oceanBlue: #26abff;
+$lightGrey: #ececec;
+$orangePoint: #ff781f;
+$greenBlue: #b3ece7;
+$standartRadius: 8px;
+
+.city-weather {
+  display: flex;
+  justify-content: center;
+  height: calc(100vh - 80px);
+  position: relative;
+  margin-top: 100px;
+  &__home-btn {
+    position: absolute;
+    top: -30px;
+    left: 20px;
+    font-weight: 300;
+    font-size: 18px;
+    color: $oceanBlue;
+  }
+  &__weather-clock {
+    position: relative;
+    width: calc(100vw - 66px);
+    max-width: 900px;
+    margin: 0 30px;
+    height: 120px;
+    border: 3px solid $oceanBlue;
+    border-radius: $standartRadius;
+    &__range {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 5px;
+      &-wrapper {
+        display: flex;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        &-section {
+          width: 100px;
+          height: 100%;
+          font-weight: 300;
+          &:nth-child(odd) {
+            background: rgba(38, 171, 255, .9);
+          }
+          &:nth-child(even) {
+            background: $greenBlue;
+          }
+          &-time{
+            margin-left: 5px;
+            color: #fff;
+          }
+          &-image {
+            display: flex;
+            justify-content: center;
+            img {
+              width: 60px;
+              height: 60px;
+            }
+          }
+          &-temperature {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 5px;
+            color: #fff;
+            font-size: 16px;
+            span {
+              padding-top: 9px;
+              font-size: 8px;
+              color: #656565;
+            }
+          }
+        }
+      }
+    }
+    &__current-time {
+      position: absolute;
+      top: calc(100% + 3px);
+      left: 50%;
+      width: 80px;
+      height: 35px;
+      transform: translateX(-50%);
+      text-align: center;
+      border-radius: 0 0 $standartRadius $standartRadius;
+      color: #fff;
+      font-weight: 300;
+      line-height: 35px;
+      font-size: 20px;
+      background: $oceanBlue;
+    }
+    &__pointer {
+      display: block;
+      height: 100%;
+      width: 2px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background: $orangePoint;
+      &::after,
+      &::before {
+        display: block;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        content: " ";
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+      }
+      &::after {
+        bottom: -3px;
+        border-bottom: 15px solid $orangePoint;
+      }
+      &::before {
+        top: -3px;
+        border-top: 15px solid $orangePoint;
+      }
+    }
+  }
+}
