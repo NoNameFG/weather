@@ -8,7 +8,7 @@ const WeekDay = ({temperature, date, iconCode}) => {
           { date.toLocaleString('en-us', {weekday:'short'}) }
         </div>
         <div>
-          { `${date.toLocaleString('en-us', {month:'short'})} ${date.getDate()}` }
+          { `${date.toLocaleString('en-us', {month:'short'})}. ${date.getDate()}` }
         </div>
       </div>
       <div className="weather__template-week__day-icon">

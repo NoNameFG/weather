@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import backgroundImageWidgetConverter from '../../../../../Function/backgroundImageWidgetConverter.js'
 
 const DayPage = ({cityID}) => {
-  const { weather, wind, name, temparature } = useSelector(state => state.widgetsData.dailyWeather[cityID])
+  const { weather, wind, name, temperature } = useSelector(state => state.widgetsData.dailyWeather[cityID])
 
 
   const windyCalc = () => {
@@ -39,7 +39,7 @@ const DayPage = ({cityID}) => {
         {name}
       </Link>
       <div className="weather__template-indicators__temperature">
-        { Math.round(temparature) } °C
+        { Math.round(temperature) } °C
       </div>
       <div className="weather__template-indicators__secondary">
         <div className="weather__template-indicators__secondary-wind">{windyCalc()} m/sec</div>

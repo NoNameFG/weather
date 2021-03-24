@@ -25,6 +25,8 @@ const REDUCER_SCHEMA = {
       name: PropTypes.string,
       wind: PropTypes.number,
       temparature: PropTypes.number,
+      pressure: PropTypes.number,
+      humidity: PropTypes.number,
       coord: PropTypes.shape({
         lat: PropTypes.number,
         lon: PropTypes.number

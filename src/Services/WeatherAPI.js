@@ -23,8 +23,10 @@ const weatherApi = {
       id: cityWeatherRaw.id,
       name: cityWeatherRaw.name,
       wind: cityWeatherRaw.wind.speed,
-      temparature: cityWeatherRaw.main.temp,
+      temperature: cityWeatherRaw.main.temp,
       coord: cityWeatherRaw.coord,
+      pressure: cityWeatherRaw.main.pressure,
+      humidity: cityWeatherRaw.main.humidity,
       weather: {
         icon: cityWeatherRaw.weather[0].icon,
         description: cityWeatherRaw.weather[0].main,
@@ -54,8 +56,10 @@ const weatherApi = {
       id: cityWeatherRaw.id,
       name: cityWeatherRaw.name,
       wind: cityWeatherRaw.wind.speed,
-      temparature: cityWeatherRaw.main.temp,
+      temperature: cityWeatherRaw.main.temp,
       coord: cityWeatherRaw.coord,
+      pressure: cityWeatherRaw.main.pressure,
+      humidity: cityWeatherRaw.main.humidity,
       weather: {
         icon: cityWeatherRaw.weather[0].icon,
         description: cityWeatherRaw.weather[0].main,
@@ -144,7 +148,8 @@ const weatherApi = {
           max: el.temp.max
         },
         weather: {
-          icon: el.weather[0].icon
+          icon: el.weather[0].icon,
+          description: el.weather[0].main
         }
       }
     })
