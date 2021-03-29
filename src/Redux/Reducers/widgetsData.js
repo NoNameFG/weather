@@ -1,7 +1,11 @@
 import {
     WIDGET_REMOVE_CITY_ID,
-    widgetWeatherAdd,
-    widgetWeatherAddMany
+    widgetWeatherAddDaily,
+    widgetWeatherAddHourly,
+    widgetWeatherAddWeekly,
+    widgetWeatherAddManyDaily,
+    widgetWeatherAddManyHourly,
+    widgetWeatherAddManyWeekly
 } from '../Constants/constants.js'
 import { createReducer } from './createReducer/createReducer.js'
 import PropTypes from 'prop-types'
@@ -68,8 +72,8 @@ const REDUCER_SCHEMA = {
   )
 }
 
-const reducerMap = {
-  [widgetWeatherAdd.REQUEST]: (state, { index, weatherType }) => {
+const reducerFunctions = {
+  weatherRequest: (state, { index, weatherType }) => {
     const newList = [...state]
     newList[index] = {
       ...newList[index],
@@ -80,7 +84,7 @@ const reducerMap = {
     }
     return newList
   },
-  [widgetWeatherAdd.SUCCESS]: (state, { weatherData, index, weatherType }) => {
+  weatherSuccess: (state, { weatherData, index, weatherType }) => {
     const newList = [...state]
     newList[index] = {
       ...newList[index],
@@ -91,7 +95,7 @@ const reducerMap = {
     }
     return newList
   },
-  [widgetWeatherAdd.ERROR]: (state, { error, index, weatherType }) => {
+  weatherError: (state, { error, index, weatherType }) => {
     const newList = [...state]
     newList[index] = {
       ...newList[index],
@@ -102,7 +106,7 @@ const reducerMap = {
     }
     return newList
   },
-  [widgetWeatherAdd.FULFILL]: (state, { index, weatherType }) => {
+  weatherFulfill: (state, { index, weatherType }) => {
     const newList = [...state]
     newList[index] = {
       ...newList[index],
@@ -114,11 +118,7 @@ const reducerMap = {
     return newList
   },
 
-
-  [WIDGET_REMOVE_CITY_ID]: (state, { id }) => (state.filter(el => el.dailyWeather.weatherData.id !== id)),
-
-
-  [widgetWeatherAddMany.REQUEST]: (state, { idList, weatherType }) => {
+  weatherRequestMany: (state, { idList, weatherType }) => {
     return idList.map((el, index) => {
       return {
         ...state[index],
@@ -129,7 +129,7 @@ const reducerMap = {
       }
     })
   },
-  [widgetWeatherAddMany.SUCCESS]: (state, { weatherDataList, weatherType }) => {
+  weatherSuccessMany: (state, { weatherDataList, weatherType }) => {
     return weatherDataList.map((el, index) => {
       return {
         ...state[index],
@@ -140,7 +140,7 @@ const reducerMap = {
       }
     })
   },
-  [widgetWeatherAddMany.ERROR]: (state, { error, weatherType }) => {
+  weatherErrorMany: (state, { error, weatherType }) => {
     return state.map(el => {
       return {
         ...el,
@@ -151,7 +151,7 @@ const reducerMap = {
       }
     })
   },
-  [widgetWeatherAddMany.FULFILL]: (state, { weatherType }) => {
+  weatherFulfillMany: (state, { weatherType }) => {
     return state.map(el => {
       return {
         ...el,
@@ -162,6 +162,43 @@ const reducerMap = {
       }
     })
   }
+}
+
+
+
+
+const reducerMap = {
+  [widgetWeatherAddDaily.REQUEST]: (state, { index }) => reducerFunctions.weatherRequest(state, { index, weatherType: weatherTypes.dailyWeather }),
+  [widgetWeatherAddDaily.SUCCESS]: (state, { weatherData, index }) => reducerFunctions.weatherSuccess(state, { weatherData, index, weatherType: weatherTypes.dailyWeather }),
+  [widgetWeatherAddDaily.ERROR]: (state, { error, index }) => reducerFunctions.weatherError(state, { error, index, weatherType: weatherTypes.dailyWeather }),
+  [widgetWeatherAddDaily.FULFILL]: (state, { index }) => reducerFunctions.weatherFulfill(state, { index, weatherType: weatherTypes.dailyWeather }),
+
+  [widgetWeatherAddHourly.REQUEST]: (state, { index }) => reducerFunctions.weatherRequest(state, { index, weatherType: weatherTypes.hourlyWeather }),
+  [widgetWeatherAddHourly.SUCCESS]: (state, { weatherData, index }) => reducerFunctions.weatherSuccess(state, { weatherData, index, weatherType: weatherTypes.hourlyWeather }),
+  [widgetWeatherAddHourly.ERROR]: (state, { error, index }) => reducerFunctions.weatherError(state, { error, index, weatherType: weatherTypes.hourlyWeather }),
+  [widgetWeatherAddHourly.FULFILL]: (state, { index }) => reducerFunctions.weatherFulfill(state, { index, weatherType: weatherTypes.hourlyWeather }),
+
+  [widgetWeatherAddWeekly.REQUEST]: (state, { index }) => reducerFunctions.weatherRequest(state, { index, weatherType: weatherTypes.weeklyWeather }),
+  [widgetWeatherAddWeekly.SUCCESS]: (state, { weatherData, index }) => reducerFunctions.weatherSuccess(state, { weatherData, index, weatherType: weatherTypes.weeklyWeather }),
+  [widgetWeatherAddWeekly.ERROR]: (state, { error, index }) => reducerFunctions.weatherError(state, { error, index, weatherType: weatherTypes.weeklyWeather }),
+  [widgetWeatherAddWeekly.FULFILL]: (state, { index }) => reducerFunctions.weatherFulfill(state, { index, weatherType: weatherTypes.weeklyWeather }),
+
+  [WIDGET_REMOVE_CITY_ID]: (state, { id }) => (state.filter(el => el.dailyWeather.weatherData.id !== id)),
+
+  [widgetWeatherAddManyDaily.REQUEST]: (state, { idList }) => reducerFunctions.weatherRequestMany(state, { idList, weatherType: weatherTypes.dailyWeather }),
+  [widgetWeatherAddManyDaily.SUCCESS]: (state, { weatherDataList }) => reducerFunctions.weatherSuccessMany(state, { weatherDataList, weatherType: weatherTypes.dailyWeather }),
+  [widgetWeatherAddManyDaily.ERROR]: (state, { error }) => reducerFunctions.weatherErrorMany(state, { error, weatherType: weatherTypes.dailyWeather }),
+  [widgetWeatherAddManyDaily.FULFILL]: (state) => reducerFunctions.weatherFulfillMany(state, { weatherType: weatherTypes.dailyWeather }),
+
+  [widgetWeatherAddManyHourly.REQUEST]: (state, { idList }) => reducerFunctions.weatherRequestMany(state, { idList, weatherType: weatherTypes.hourlyWeather }),
+  [widgetWeatherAddManyHourly.SUCCESS]: (state, { weatherDataList }) => reducerFunctions.weatherSuccessMany(state, { weatherDataList, weatherType: weatherTypes.hourlyWeather }),
+  [widgetWeatherAddManyHourly.ERROR]: (state, { error }) => reducerFunctions.weatherErrorMany(state, { error, weatherType: weatherTypes.hourlyWeather }),
+  [widgetWeatherAddManyHourly.FULFILL]: (state) => reducerFunctions.weatherFulfillMany(state, { weatherType: weatherTypes.hourlyWeather }),
+
+  [widgetWeatherAddManyWeekly.REQUEST]: (state, { idList }) => reducerFunctions.weatherRequestMany(state, { idList, weatherType: weatherTypes.weeklyWeather }),
+  [widgetWeatherAddManyWeekly.SUCCESS]: (state, { weatherDataList }) => reducerFunctions.weatherSuccessMany(state, { weatherDataList, weatherType: weatherTypes.weeklyWeather }),
+  [widgetWeatherAddManyWeekly.ERROR]: (state, { error }) => reducerFunctions.weatherErrorMany(state, { error, weatherType: weatherTypes.weeklyWeather }),
+  [widgetWeatherAddManyWeekly.FULFILL]: (state) => reducerFunctions.weatherFulfillMany(state, { weatherType: weatherTypes.weeklyWeather })
 }
 
 export const widgetsData = createReducer(reducerMap, initialState)

@@ -1,8 +1,17 @@
 import { createTypes } from './createTypes/createTypes.js'
 
 export const WIDGET_REMOVE_CITY_ID = 'WIDGET_REMOVE_CITY_ID'
-export const WIDGET_WEATHER_ADD = 'WIDGET_WEATHER_ADD'
-export const WIDGET_WEATHER_ADD_MANY = 'WIDGET_WEATHER_ADD_MANY'
+export const WIDGET_WEATHER_ADD_DAILY = 'WIDGET_WEATHER_ADD_DAILY'
+export const WIDGET_WEATHER_ADD_HOURLY = 'WIDGET_WEATHER_ADD_HOURLY'
+export const WIDGET_WEATHER_ADD_WEEKLY = 'WIDGET_WEATHER_ADD_WEEKLY'
+export const WIDGET_WEATHER_ADD_MANY_DAILY = 'WIDGET_WEATHER_ADD_MANY_DAILY'
+export const WIDGET_WEATHER_ADD_MANY_HOURLY = 'WIDGET_WEATHER_ADD_MANY_HOURLY'
+export const WIDGET_WEATHER_ADD_MANY_WEEKLY = 'WIDGET_WEATHER_ADD_MANY_WEEKLY'
 
-export const widgetWeatherAdd = createTypes(WIDGET_WEATHER_ADD)
-export const widgetWeatherAddMany = createTypes(WIDGET_WEATHER_ADD_MANY)
+
+export const widgetWeatherAddDaily = createTypes(WIDGET_WEATHER_ADD_DAILY)
+export const widgetWeatherAddHourly = createTypes(WIDGET_WEATHER_ADD_HOURLY)
+export const widgetWeatherAddWeekly = createTypes(WIDGET_WEATHER_ADD_WEEKLY)
+export const widgetWeatherAddManyDaily = createTypes(WIDGET_WEATHER_ADD_MANY_DAILY)
+export const widgetWeatherAddManyHourly = createTypes(WIDGET_WEATHER_ADD_MANY_HOURLY)
+export const widgetWeatherAddManyWeekly = createTypes(WIDGET_WEATHER_ADD_MANY_WEEKLY)

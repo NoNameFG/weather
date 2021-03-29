@@ -8,7 +8,7 @@ const WeatherClockSection = ({ temperature, weather, hour }) => {
       </div>
       <div className="city-weather__weather-clock__range-wrapper-section-image">
         <img
-          src={iconCodeURLconvert(weather.icon)}
+          src={iconCodeURLconvert(weather.icon, true)}
           alt="weather_icon"
         />
       </div>

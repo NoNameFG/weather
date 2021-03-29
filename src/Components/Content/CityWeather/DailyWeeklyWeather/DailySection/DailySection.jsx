@@ -1,7 +1,10 @@
 import { iconCodeURLconvert } from '../../../../../Function/iconCodeURLconvert.js'
+import Indicator from './Indicator/Indicator.jsx'
 
 const DailySection = ({ cityName, indicators, iconCode }) => {
   const { temperature, condition, wind, pressure, humidity } = indicators
+
+  console.log(indicators)
 
   const getDate = () => {
     const date = new Date()
@@ -16,33 +19,19 @@ const DailySection = ({ cityName, indicators, iconCode }) => {
           { cityName }
         </div>
         <div className="city-weather__container-daily__head-icon">
-          <img src={iconCodeURLconvert(iconCode)} alt="weather_icon"/>
+          <img src={iconCodeURLconvert(iconCode, true)} alt="weather_icon"/>
         </div>
       </div>
       <div className="city-weather__container-daily__indicators">
         <div className="city-weather__container-daily__indicators-date">
           { getDate() }
         </div>
-        <div className="city-weather__container-daily__indicators-importance">
-          <span>Temperature:</span>
-          { Math.round(temperature) } °C
-        </div>
-        <div className="city-weather__container-daily__indicators-importance">
-          <span>Condition:</span>
-          { condition }
-        </div>
-        <div className="city-weather__container-daily__indicators-importance">
-          <span>Wind:</span>
-          { wind } m/s
-        </div>
-        <div className="city-weather__container-daily__indicators-importance">
-          <span>Humidity:</span>
-          { humidity }%
-        </div>
-        <div className="city-weather__container-daily__indicators-importance">
-          <span>Pressure:</span>
-          { pressure } N/m2
-        </div>
+
+        <Indicator units=" °C" value={Math.round(temperature)} name="Temperature" />
+        <Indicator units="" value={condition} name="Condition" />
+        <Indicator units=" m/s" value={wind} name="Wind" />
+        <Indicator units="%" value={humidity} name="Humidity" />
+        <Indicator units=" N/m2" value={pressure} name="Pressure" />
       </div>
     </div>
   )

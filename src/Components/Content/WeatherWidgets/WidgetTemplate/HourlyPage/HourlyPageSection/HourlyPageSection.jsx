@@ -1,5 +1,6 @@
 import React from 'react'
 import backgroundColorIndicatorHourly from '../../../../../../Function/backgroundColorIndicatorHourly.js'
+import { iconCodeURLconvert } from '../../../../../../Function/iconCodeURLconvert.js'
 
 const HourlyPageSection = ({ hour, iconCode, weatherCode, temperature }) => {
   return(
@@ -13,7 +14,7 @@ const HourlyPageSection = ({ hour, iconCode, weatherCode, temperature }) => {
           { hour }:00
         </div>
         <div className="weather__template-hourly__range-hour__info-icon">
-          <img src={`http://openweathermap.org/img/wn/${iconCode}@4x.png`} alt="weather_icon"/>
+          <img src={ iconCodeURLconvert(iconCode) } alt="weather_icon"/>
         </div>
         <div className="weather__template-hourly__range-hour__info-temperature">
           {Math.round(temperature)} °C

@@ -12,7 +12,7 @@ const WeeklyItem = ({ date, temperature, iconCode, condition }) => {
         { date.toLocaleString('en-us', {weekday:'short'}) }
       </div>
       <div className="city-weather__container-weekly__item-icon">
-        <img src={ iconCodeURLconvert(iconCode) } alt="weather_icon"/>
+        <img src={ iconCodeURLconvert(iconCode, true) } alt="weather_icon"/>
       </div>
       <div className="city-weather__container-weekly__item-condition">
         { condition }
