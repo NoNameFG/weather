@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import React from 'react'
 import WeekDay from './WeekDay.jsx'
-import weatherApi from '../../../../../Services/WeatherAPI.js'
-import shortid from 'shortid'
 
-const WeekPage = ({ cityID }) => {
-  const dayList = useSelector(state => state.widgetsData.weeklyWeather[cityID])
 
-  const renderDayList = dayList.map(el => (
+const WeekPage = ({ weeklyWeather }) => {
+  const renderDayList = weeklyWeather?.weatherData.map(el => (
     <WeekDay
-      key={shortid.generate()}
+      key={ el.date.getTime() }
       temperature={el.temp}
       date={el.date}
       iconCode={el.weather.icon}

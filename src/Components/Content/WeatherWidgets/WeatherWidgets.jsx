@@ -4,13 +4,19 @@ import WidgetTemplate from './WidgetTemplate/WidgetTemplate.jsx'
 import { useSelector } from 'react-redux'
 
 const WeatherWidgets = () => {
-  const cityList = useSelector(state => state.widgetsData.idCities)
+  const cityList = useSelector(state => state.widgetsData)
 
   const widgetList = cityList.map(el => (
-    <WidgetTemplate
-      key={ 'widget' + el }
-      cityID={el}
-    />
+    el.dailyWeather.loading ?
+      null
+    :
+      <WidgetTemplate
+        key={ 'widget-' + el.dailyWeather?.weatherData?.id }
+        dailyWeather={ el.dailyWeather }
+        hourlyWeather={ el.hourlyWeather }
+        weeklyWeather={ el.weeklyWeather }
+      />
+
   ))
 
   return(

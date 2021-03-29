@@ -1,0 +1,5 @@
+export const TRIGGER = 'TRIGGER'
+export const REQUEST = 'REQUEST'
+export const SUCCESS = 'SUCCESS'
+export const ERROR = 'ERROR'
+export const FULFILL = 'FULFILL'

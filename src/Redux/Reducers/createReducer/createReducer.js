@@ -6,5 +6,5 @@ export const createReducer = (reducerMap, initialState = null) => (state = initi
     stateUpdate = reducer(state, action.payload, action)
   }
 
-  return stateUpdate === state ? state : {...state, ...stateUpdate}
+  return stateUpdate === state ? state : stateUpdate
 }

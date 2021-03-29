@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import shortid from 'shortid'
 import WeatherClockSection from './WeatherClockSection/WeatherClockSection.jsx'
 
 const WeatherClock = ({ cityID }) => {
@@ -8,12 +7,10 @@ const WeatherClock = ({ cityID }) => {
   const [ currentTime, setCurrentTime ] = useState('0:00')
 
 
-  let hoursList = []
-  const hoursData = useSelector(state => state.widgetsData.hourlyWeather[cityID])
-
-  if(hoursData){
-    hoursList = hoursData
-  }
+  const hoursList = useSelector(state => {
+    const data = state.widgetsData.find(el => el?.dailyWeather?.weatherData?.id === Number(cityID))
+    return data?.hourlyWeather?.weatherData
+  })
 
   const getTime = () => {
     const nowTime = new Date()
@@ -45,9 +42,9 @@ const WeatherClock = ({ cityID }) => {
     }
   }, [])
 
-  const hoursListRend = hoursList.map((el, index) => (
+  const hoursListRend = () => hoursList.map((el, index) => (
     <WeatherClockSection
-      key={shortid.generate()}
+      key={ el.date.getTime() }
       hour={index}
       temperature={el.temp}
       weather={el.weather}
@@ -61,7 +58,7 @@ const WeatherClock = ({ cityID }) => {
           style={{left: `calc(50% - ${listPosition})`}}
           className="city-weather__weather-clock__range-wrapper"
         >
-          { hoursListRend }
+          { hoursList && hoursListRend() }
         </div>
       </div>
       <span className="city-weather__weather-clock__pointer"></span>

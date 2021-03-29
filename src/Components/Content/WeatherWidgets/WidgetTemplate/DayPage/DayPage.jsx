@@ -1,18 +1,16 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import backgroundImageWidgetConverter from '../../../../../Function/backgroundImageWidgetConverter.js'
 
-const DayPage = ({cityID}) => {
-  const { weather, wind, name, temperature } = useSelector(state => state.widgetsData.dailyWeather[cityID])
-
-
+const DayPage = ({ dailyWeather }) => {
   const windyCalc = () => {
-    if(!(wind + '').includes('.')) {
-      return wind + '.0'
+    if(!(dailyWeather?.weatherData?.wind + '').includes('.')) {
+      return dailyWeather?.weatherData?.wind + '.0'
     }
-    return wind
+    return dailyWeather?.weatherData?.wind
   }
+
+
 
   const nowDate = () => {
     let date = new Date()
@@ -22,7 +20,7 @@ const DayPage = ({cityID}) => {
   }
 
   const weatherImageURL = () => {
-    return `/image/widgetBackground/${backgroundImageWidgetConverter(weather.id)}.jpeg`
+    return `/image/widgetBackground/${backgroundImageWidgetConverter(dailyWeather?.weatherData?.weather.id)}.jpeg`
   }
 
   return(
@@ -33,13 +31,13 @@ const DayPage = ({cityID}) => {
       }}
     >
       <Link
-        to={`/city?id=${cityID}`}
+        to={`/city?id=${dailyWeather?.weatherData?.id}`}
         className="weather__template-indicators__city"
       >
-        {name}
+        {dailyWeather?.weatherData?.name}
       </Link>
       <div className="weather__template-indicators__temperature">
-        { Math.round(temperature) } °C
+        { Math.round(dailyWeather?.weatherData?.temperature) } °C
       </div>
       <div className="weather__template-indicators__secondary">
         <div className="weather__template-indicators__secondary-wind">{windyCalc()} m/sec</div>

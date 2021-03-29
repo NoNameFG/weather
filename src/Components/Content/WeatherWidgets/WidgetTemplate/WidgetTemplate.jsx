@@ -9,26 +9,26 @@ import { removeFromLocalStorage } from '../../../../Function/manipulateCityLocSt
 import { DAY, WEEK, HOURLY } from '../../../../Constants/RangeTypes.js'
 
 
-const WidgetTemplate = ({cityID}) => {
+const WidgetTemplate = ({ dailyWeather, hourlyWeather, weeklyWeather, indexInStore }) => {
   const [ section, setSection ] = useState(DAY)
   const dispatch = useDispatch()
 
   const content = () => {
     switch (section) {
       case WEEK:
-        return <WeekPage cityID={cityID}/>
+        return <WeekPage weeklyWeather={weeklyWeather}/>
       case HOURLY:
-        return <HourlyPage cityID={cityID}/>
+        return <HourlyPage hourlyWeather={hourlyWeather}/>
       case DAY:
       default:
-        return <DayPage cityID={cityID}/>
+        return <DayPage dailyWeather={dailyWeather} />
     }
   }
 
 
   const removeWidget = () => {
-    dispatch(widgetRemoveCityID({id: cityID}))
-    removeFromLocalStorage(cityID)
+    dispatch(widgetRemoveCityID({id: dailyWeather.weatherData.id}))
+    removeFromLocalStorage(dailyWeather.weatherData.id)
   }
 
   return(
