@@ -4,17 +4,17 @@ import { useSelector } from 'react-redux'
 
 const DailyWeeklyWeather = ({ cityID }) => {
   const { dailyWeather, weeklyWeather } = useSelector(state => {
-    const data = state.widgetsData.find(el => el?.dailyWeather?.weatherData?.id === Number(cityID))
+    const data = state.widgetsData.find(el => el.dailyWeather.id === Number(cityID))
     return {
-      dailyWeather: data?.dailyWeather?.weatherData,
-      weeklyWeather: data?.weeklyWeather?.weatherData
+      dailyWeather: data.dailyWeather,
+      weeklyWeather: data.weeklyWeather.weatherData
     }
   })
 
   const weeklyList = () => weeklyWeather.map(el => (
     <WeeklyItem
-      key={ el.date.getTime() }
-      date={ el.date }
+      key={ new Date(el.date).getTime() }
+      date={ new Date(el.date) }
       temperature={ el.temp }
       iconCode={ el.weather.icon }
       condition={ el.weather.description }

@@ -3,14 +3,14 @@ import HourlyPageSection from './HourlyPageSection/HourlyPageSection.jsx'
 import HourlyPageTimer from './HourlyPageTimer.jsx';
 
 const HourlyPage = ({ hourlyWeather }) => {
-  const weatherListRend = hourlyWeather?.weatherData.map((el, index) => {
+  const weatherListRend = hourlyWeather.weatherData.map((el, index) => {
     return(
       <HourlyPageSection
-        key={ el.date.getTime() }
+        key={ new Date(el.date).getTime() }
         hour={index}
         iconCode={el.weather.icon}
         weatherCode={el.weather.id}
-        temperature={el?.temp}
+        temperature={el.temp}
       />
     )
   })

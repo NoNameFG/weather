@@ -12,7 +12,8 @@ function App() {
 
   useLayoutEffect(() => {
     const cityList = JSON.parse(localStorage.getItem('cityList'))
-    if(cityList){
+    const weatherInformation = JSON.parse(localStorage.getItem('weatherInformation'))
+    if(cityList && !weatherInformation.length){
       dispatch(addManyCityData({idList: cityList}))
     }
   })

@@ -1,4 +1,5 @@
-import { iconCodeURLconvert } from '../../../../../Function/iconCodeURLconvert.js'
+import { iconCodeURLconvert, iconSource } from '../../../../../Function/iconCodeURLconvert.js'
+import WeatherIcon from '../../../../WeatherIcon/WeatherIcon.jsx'
 
 const WeatherClockSection = ({ temperature, weather, hour }) => {
   return (
@@ -6,12 +7,11 @@ const WeatherClockSection = ({ temperature, weather, hour }) => {
       <div className="city-weather__weather-clock__range-wrapper-section-time">
         { hour }:00
       </div>
-      <div className="city-weather__weather-clock__range-wrapper-section-image">
-        <img
-          src={iconCodeURLconvert(weather.icon, true)}
-          alt="weather_icon"
-        />
-      </div>
+      <WeatherIcon
+        className="city-weather__weather-clock__range-wrapper-section-image"
+        iconCode={weather.icon}
+        source={iconSource.BMCDN}
+      />
       <div className="city-weather__weather-clock__range-wrapper-section-temperature">
         <span>Temperature:</span>
         { Math.round(temperature) } °C

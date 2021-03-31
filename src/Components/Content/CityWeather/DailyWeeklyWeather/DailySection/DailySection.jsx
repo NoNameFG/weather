@@ -1,10 +1,11 @@
-import { iconCodeURLconvert } from '../../../../../Function/iconCodeURLconvert.js'
+import { iconCodeURLconvert, iconSource } from '../../../../../Function/iconCodeURLconvert.js'
 import Indicator from './Indicator/Indicator.jsx'
+import WeatherIcon from '../../../../WeatherIcon/WeatherIcon.jsx'
+
 
 const DailySection = ({ cityName, indicators, iconCode }) => {
   const { temperature, condition, wind, pressure, humidity } = indicators
 
-  console.log(indicators)
 
   const getDate = () => {
     const date = new Date()
@@ -18,9 +19,11 @@ const DailySection = ({ cityName, indicators, iconCode }) => {
         <div className="city-weather__container-daily__head-city">
           { cityName }
         </div>
-        <div className="city-weather__container-daily__head-icon">
-          <img src={iconCodeURLconvert(iconCode, true)} alt="weather_icon"/>
-        </div>
+        <WeatherIcon
+          className="city-weather__container-daily__head-icon"
+          iconCode={iconCode}
+          source={iconSource.BMCDN}
+        />
       </div>
       <div className="city-weather__container-daily__indicators">
         <div className="city-weather__container-daily__indicators-date">

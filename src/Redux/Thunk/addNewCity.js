@@ -5,7 +5,7 @@ import weatherApi from '../../Services/WeatherAPI.js'
 
 
 const dailyProcess = (dispatch, index, data, existCities) => {
-  if(!existCities.some(el => el.dailyWeather.weatherData.id === data.id)){
+  if(!existCities.some(el => el.dailyWeather.id === data.id)){
     dispatch(widgetWeatherAddDaily.SUCCESS({
       weatherData: data,
       index
@@ -53,9 +53,15 @@ const hourlyWeeklyErrorProcess = (dispatch, index, e) => {
 }
 
 const fulfillALl = (dispatch, index) => {
-  dispatch(widgetWeatherAddDaily.FULFILL({ index }))
-  dispatch(widgetWeatherAddHourly.FULFILL({ index }))
-  dispatch(widgetWeatherAddWeekly.FULFILL({ index }))
+
+  setTimeout(() => {
+
+    dispatch(widgetWeatherAddDaily.FULFILL({ index }))
+    dispatch(widgetWeatherAddHourly.FULFILL({ index }))
+    dispatch(widgetWeatherAddWeekly.FULFILL({ index }))
+
+  }, 1000)
+
 }
 
 export const addNewCity = ({ index, city, existCities }) => {

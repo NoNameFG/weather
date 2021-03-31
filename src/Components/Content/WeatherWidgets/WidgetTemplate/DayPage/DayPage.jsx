@@ -1,13 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import backgroundImageWidgetConverter from '../../../../../Function/backgroundImageWidgetConverter.js'
+import Favorite from './Favorite/Favorite.jsx'
+import { useSelector } from 'react-redux'
 
-const DayPage = ({ dailyWeather }) => {
+const DayPage = ({ dailyWeather, isFavorite }) => {
+
   const windyCalc = () => {
-    if(!(dailyWeather?.weatherData?.wind + '').includes('.')) {
-      return dailyWeather?.weatherData?.wind + '.0'
+    if(!(dailyWeather?.wind + '').includes('.')) {
+      return dailyWeather?.wind + '.0'
     }
-    return dailyWeather?.weatherData?.wind
+    return dailyWeather?.wind
   }
 
 
@@ -20,7 +23,7 @@ const DayPage = ({ dailyWeather }) => {
   }
 
   const weatherImageURL = () => {
-    return `/image/widgetBackground/${backgroundImageWidgetConverter(dailyWeather?.weatherData?.weather.id)}.jpeg`
+    return `/image/widgetBackground/${backgroundImageWidgetConverter(dailyWeather?.weather.id)}.jpeg`
   }
 
   return(
@@ -31,13 +34,16 @@ const DayPage = ({ dailyWeather }) => {
       }}
     >
       <Link
-        to={`/city?id=${dailyWeather?.weatherData?.id}`}
+        to={`/city?id=${dailyWeather?.id}`}
         className="weather__template-indicators__city"
       >
-        {dailyWeather?.weatherData?.name}
+        {dailyWeather?.name}
       </Link>
+
+      <Favorite isFavorite={isFavorite} cityID={dailyWeather.id}/>
+
       <div className="weather__template-indicators__temperature">
-        { Math.round(dailyWeather?.weatherData?.temperature) } °C
+        { Math.round(dailyWeather?.temperature) } °C
       </div>
       <div className="weather__template-indicators__secondary">
         <div className="weather__template-indicators__secondary-wind">{windyCalc()} m/sec</div>

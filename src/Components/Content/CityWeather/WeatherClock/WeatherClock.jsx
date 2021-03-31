@@ -8,8 +8,8 @@ const WeatherClock = ({ cityID }) => {
 
 
   const hoursList = useSelector(state => {
-    const data = state.widgetsData.find(el => el?.dailyWeather?.weatherData?.id === Number(cityID))
-    return data?.hourlyWeather?.weatherData
+    const data = state.widgetsData.find(el => el.dailyWeather.id === Number(cityID))
+    return data.hourlyWeather.weatherData
   })
 
   const getTime = () => {
@@ -44,7 +44,7 @@ const WeatherClock = ({ cityID }) => {
 
   const hoursListRend = () => hoursList.map((el, index) => (
     <WeatherClockSection
-      key={ el.date.getTime() }
+      key={ new Date(el.date).getTime() }
       hour={index}
       temperature={el.temp}
       weather={el.weather}

@@ -5,9 +5,9 @@ import WeekDay from './WeekDay.jsx'
 const WeekPage = ({ weeklyWeather }) => {
   const renderDayList = weeklyWeather?.weatherData.map(el => (
     <WeekDay
-      key={ el.date.getTime() }
+      key={new Date(el.date).getTime() }
       temperature={el.temp}
-      date={el.date}
+      date={new Date(el.date)}
       iconCode={el.weather.icon}
     />
   ))

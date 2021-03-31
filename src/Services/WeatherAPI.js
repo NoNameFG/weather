@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const apiKey = 'c9e711e5794aade84f2deff499ce566f'
+const apiKey = '9090b3cebaa3203829f4250080c1315d'
 
 const openWeatherAPI = {
   current: {

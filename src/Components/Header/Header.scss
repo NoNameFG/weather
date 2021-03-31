@@ -1,5 +1,6 @@
 $oceanBlue: #26abff;
 $lightGrey: #ececec;
+$darkGrey: #656565;
 $standartRadius: 8px;
 
 .header {
@@ -12,6 +13,95 @@ $standartRadius: 8px;
   top: 0;
   z-index: 10;
   background: $oceanBlue;
+  &__widget-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    &__slide {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      &-menu {
+        width: 270px;
+        height: 100%;
+        background: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        &__list {
+          width: 100%;
+          &-item {
+            display: flex;
+            justify-content: space-between;
+            height: 30px;
+            line-height: 30px;
+            font-weight: 300;
+            margin: 5px 30px;
+            &-display {
+              display: flex;
+              align-items: center;
+            }
+          }
+        }
+        &-title {
+          display: block;
+          width: 100%;
+          height: 40px;
+          margin-bottom: 110px;
+          text-align: center;
+          font-size: 22px;
+          font-weight: 300;
+          color: $darkGrey;
+          line-height: 40px;
+        }
+      }
+      &-filter {
+        width: calc(100% - 270px);
+        background: rgba(0, 0, 0, .2)
+      }
+    }
+    &__button {
+      position: relative;
+      width: 60px;
+      height: 60px;
+      border: none;
+      outline: none;
+      background: inherit;
+      cursor: pointer;
+      &:hover {
+        background: #61c2ff;
+      }
+      &-line {
+        display: block;
+        position: absolute;
+        width: 25px;
+        border-radius: 1px;
+        height: 2px;
+        background: #fff;
+        &:first-child{
+          top: 24px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        &:nth-child(2){
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+        &:last-child{
+          bottom: 24px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+      }
+    }
+  }
   &__search {
     display: flex;
     min-width: 400px;

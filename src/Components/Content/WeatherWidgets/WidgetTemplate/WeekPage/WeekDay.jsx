@@ -1,5 +1,6 @@
 import React from 'react'
-import { iconCodeURLconvert } from '../../../../../Function/iconCodeURLconvert.js'
+import { iconCodeURLconvert, iconSource } from '../../../../../Function/iconCodeURLconvert.js'
+import WeatherIcon from '../../../../WeatherIcon/WeatherIcon.jsx'
 
 const WeekDay = ({temperature, date, iconCode}) => {
   return(
@@ -12,9 +13,11 @@ const WeekDay = ({temperature, date, iconCode}) => {
           { `${date.toLocaleString('en-us', {month:'short'})}. ${date.getDate()}` }
         </div>
       </div>
-      <div className="weather__template-week__day-icon">
-        <img src={ iconCodeURLconvert(iconCode) } alt="weather_icon"/>
-      </div>
+      <WeatherIcon
+        className="weather__template-week__day-icon"
+        iconCode={iconCode}
+        source={iconSource.OPENWEATHER}
+      />
       <div className="weather__template-week__day-temperature">
         <div>min <span>{ Math.round(temperature.min) } °C</span></div>
         <div>max <span>{ Math.round(temperature.max) } °C</span></div>

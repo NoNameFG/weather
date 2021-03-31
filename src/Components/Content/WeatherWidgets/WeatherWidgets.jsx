@@ -7,16 +7,11 @@ const WeatherWidgets = () => {
   const cityList = useSelector(state => state.widgetsData)
 
   const widgetList = cityList.map(el => (
-    el.dailyWeather.loading ?
-      null
-    :
+    (!el.dailyWeather.error && el.widgetSettings.displayFlag) &&
       <WidgetTemplate
-        key={ 'widget-' + el.dailyWeather?.weatherData?.id }
-        dailyWeather={ el.dailyWeather }
-        hourlyWeather={ el.hourlyWeather }
-        weeklyWeather={ el.weeklyWeather }
+        key={ 'widget-' + el.widgetSettings.uniqeKey }
+        { ...el }
       />
-
   ))
 
   return(

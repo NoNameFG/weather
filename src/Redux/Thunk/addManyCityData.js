@@ -3,8 +3,12 @@ import { weatherTypes } from '../Reducers/widgetsData.js'
 
 import weatherApi from '../../Services/WeatherAPI.js'
 
-const dailyProcess = (data, dispatch, idList) => {
+const dailySuccessProcess = (data, dispatch) => {
   dispatch(widgetWeatherAddManyDaily.SUCCESS({ weatherDataList: data }))
+  return data
+}
+
+const hourlyWeeklyRequestProcess = (data, dispatch, idList) => {
   dispatch(widgetWeatherAddManyHourly.REQUEST({ idList }))
   dispatch(widgetWeatherAddManyWeekly.REQUEST({ idList }))
   const coordList = data.map(el => el.coord)
@@ -14,7 +18,7 @@ const dailyProcess = (data, dispatch, idList) => {
   ])
 }
 
-const dailyErrorProccess = (e, dispatch) => {
+const dailyErrorProcess = (e, dispatch) => {
   dispatch(widgetWeatherAddManyDaily.ERROR({ error: e.message }))
 }
 
@@ -30,9 +34,14 @@ const hourlyWeeklyErrorProcess = (e, dispatch) => {
 }
 
 const fulfillALl = dispatch => {
-  dispatch(widgetWeatherAddManyDaily.FULFILL())
-  dispatch(widgetWeatherAddManyHourly.FULFILL())
-  dispatch(widgetWeatherAddManyWeekly.FULFILL())
+  setTimeout(() => {
+
+    dispatch(widgetWeatherAddManyDaily.FULFILL())
+    dispatch(widgetWeatherAddManyHourly.FULFILL())
+    dispatch(widgetWeatherAddManyWeekly.FULFILL())
+
+  }, 1000)
+
 }
 
 export const addManyCityData = ({ idList }) => {
@@ -40,11 +49,12 @@ export const addManyCityData = ({ idList }) => {
     dispatch(widgetWeatherAddManyDaily.REQUEST({ idList }))
 
     return weatherApi.getDailyDataList({ idList })
-      .then(data => dailyProcess(data, dispatch, idList))
-      .catch(e => dailyErrorProccess(e, dispatch))
+      .then(data => dailySuccessProcess(data, dispatch))
+      .then(data => hourlyWeeklyRequestProcess(data, dispatch, idList))
+      .catch(e => dailyErrorProcess(e, dispatch))
       .then(data => hourlyWeeklyProcess(data, dispatch))
       .catch(e => hourlyWeeklyErrorProcess(e, dispatch))
       .finally(() => fulfillALl(dispatch))
-      
+
   }
 }

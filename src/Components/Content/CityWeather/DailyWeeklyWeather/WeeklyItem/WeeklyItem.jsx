@@ -1,4 +1,7 @@
-import { iconCodeURLconvert } from '../../../../../Function/iconCodeURLconvert.js'
+import { iconCodeURLconvert, iconSource } from '../../../../../Function/iconCodeURLconvert.js'
+import WeatherIcon from '../../../../WeatherIcon/WeatherIcon.jsx'
+
+
 
 const WeeklyItem = ({ date, temperature, iconCode, condition }) => {
   return(
@@ -11,9 +14,11 @@ const WeeklyItem = ({ date, temperature, iconCode, condition }) => {
       <div className="city-weather__container-weekly__item-day">
         { date.toLocaleString('en-us', {weekday:'short'}) }
       </div>
-      <div className="city-weather__container-weekly__item-icon">
-        <img src={ iconCodeURLconvert(iconCode, true) } alt="weather_icon"/>
-      </div>
+      <WeatherIcon
+        className="city-weather__container-weekly__item-icon"
+        iconCode={iconCode}
+        source={iconSource.BMCDN}
+      />
       <div className="city-weather__container-weekly__item-condition">
         { condition }
       </div>
