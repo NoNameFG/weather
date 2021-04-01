@@ -2,6 +2,7 @@ import React from 'react'
 import './WeatherWidgets.scss'
 import WidgetTemplate from './WidgetTemplate/WidgetTemplate.jsx'
 import { useSelector } from 'react-redux'
+import ReloadButton from './ReloadButton/ReloadButton.jsx'
 
 const WeatherWidgets = () => {
   const cityList = useSelector(state => state.widgetsData)
@@ -16,9 +17,14 @@ const WeatherWidgets = () => {
 
   return(
     <>
-      <div className="city-search">
-        <input type="text" placeholder="City name..."/>
+      <div className="city-settings">
+        <div className="city-settings__search">
+          <input type="text" placeholder="City name..."/>
+        </div>
+
+        <ReloadButton/>
       </div>
+
       <div className="weather">
         { widgetList }
       </div>

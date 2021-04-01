@@ -3,15 +3,33 @@ $lightGrey: #ececec;
 $standartRadius: 8px;
 
 .city-search {
+
+
+}
+
+.city-settings {
+  display: flex;
+  justify-content: space-between;
   margin-top: 75px;
-  padding-left: 25px;
-  input {
-    border: none;
-    outline: none;
-    color: #656565;
-    width: 160px;
-    &:focus {
-      border-bottom: 2px solid $oceanBlue;
+  padding: 0 25px;
+  &__search {
+    input {
+      border: none;
+      outline: none;
+      color: #656565;
+      width: 160px;
+      &:focus {
+        border-bottom: 2px solid $oceanBlue;
+      }
+    }
+  }
+  &__reload {
+    & button {
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      color: $oceanBlue;
     }
   }
 }
