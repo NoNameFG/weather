@@ -1,0 +1,23 @@
+$oceanBlue: #26abff;
+$lightGrey: #ececec;
+$darkGrey: #656565;
+$standartRadius: 8px;
+
+.template-button {
+  width: 140px;
+  height: 30px;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  background: none;
+  cursor: pointer;
+  &--primary {
+    background: $oceanBlue;
+    color: #fff;
+  }
+  &--secondary {
+    background: $lightGrey;
+    color: $oceanBlue;
+  }
+}

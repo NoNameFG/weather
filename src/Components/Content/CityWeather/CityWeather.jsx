@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import './CityWeather.scss'
 import Preloader from '../../Preloader/Preloader.jsx'
+import withHeader from '../../HOC/withHeader.jsx'
 
 
 const CityWeather = () => {
@@ -36,4 +37,4 @@ const CityWeather = () => {
   )
 }
 
-export default CityWeather
+export default withHeader(CityWeather)

@@ -3,6 +3,7 @@ import './WeatherWidgets.scss'
 import WidgetTemplate from './WidgetTemplate/WidgetTemplate.jsx'
 import { useSelector } from 'react-redux'
 import ReloadButton from './ReloadButton/ReloadButton.jsx'
+import withHeader from '../../HOC/withHeader.jsx'
 
 const WeatherWidgets = () => {
   const cityList = useSelector(state => state.widgetsData)
@@ -32,4 +33,4 @@ const WeatherWidgets = () => {
   )
 }
 
-export default WeatherWidgets
+export default withHeader(WeatherWidgets)

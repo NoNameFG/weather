@@ -3,7 +3,8 @@ import { ReactComponent as SearchSVG } from '../../Dist/Header/SearchSVG.svg'
 import './Header.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { addNewCity } from '../../Redux/Thunk/addNewCity.js'
-import WidgetNavigation from './WidgetNavigation.jsx/WidgetNavigation.jsx'
+import WidgetNavigation from './WidgetNavigation/WidgetNavigation.jsx'
+import ProfileInteraction from './ProfileInteraction/ProfileIntercation.jsx'
 
 const Header = () => {
   const [ city, setCity ] = useState('')
@@ -24,6 +25,9 @@ const Header = () => {
   return(
     <header className="header">
       <WidgetNavigation/>
+
+      <ProfileInteraction/>
+
       <form className="header__search" onSubmit={addCity}>
         <div className="header__search-icon">
           <SearchSVG/>

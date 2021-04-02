@@ -5,6 +5,7 @@ import './App.scss';
 import Header from './Components/Header/Header.jsx'
 import WeatherWidgets from './Components/Content/WeatherWidgets/WeatherWidgets.jsx'
 import CityWeather from './Components/Content/CityWeather/CityWeather.jsx'
+import Login from './Components/Content/Login/Login.jsx'
 import { Switch, Route } from 'react-router-dom'
 
 function App() {
@@ -20,7 +21,6 @@ function App() {
 
   return (
     <div className="App">
-      <Header/>
       <Switch>
         <Route exact path="/">
           <WeatherWidgets/>
@@ -28,7 +28,11 @@ function App() {
         <Route path="/city">
           <CityWeather/>
         </Route>
-
+        <Route path="/login">
+          <Login/>
+        </Route>
+        <Route path="/registration">
+        </Route>
       </Switch>
     </div>
   );

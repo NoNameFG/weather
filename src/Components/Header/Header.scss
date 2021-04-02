@@ -13,6 +13,29 @@ $standartRadius: 8px;
   top: 0;
   z-index: 10;
   background: $oceanBlue;
+  &__profile{
+    display: flex;
+    height: 60px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 60px;
+      height: 60px;
+      border: none;
+      background: inherit;
+      outline: none;
+      cursor: pointer;
+      svg {
+        width: 20px;
+        height: 20px;
+        fill: #fff;
+      }
+    }
+  }
   &__widget-navigation {
     display: flex;
     justify-content: center;

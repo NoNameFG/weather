@@ -1,0 +1,36 @@
+$oceanBlue: #26abff;
+$lightGrey: #ececec;
+$darkGrey: #656565;
+$standartRadius: 8px;
+
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: $oceanBlue;
+  &__template {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 350px;
+    height: 300px;
+    padding-top: 100px;
+    background: #fff;
+    border-radius: $standartRadius;
+    box-shadow: 0 0 15px rgba(0,0,0,0.25);
+    &-buttons-group {
+      margin-top: 130px;
+      &-button {
+        margin-right: 10px;
+      }
+    }
+    &-fields-group {
+      &-input {
+        margin-bottom: 15px;
+      }
+    }
+  }
+}
