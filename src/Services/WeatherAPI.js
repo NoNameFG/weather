@@ -10,7 +10,7 @@ const openWeatherAPI = {
           q: cityName,
           units: 'metric',
           appid: apiKey
-        }
+        },
       }
     ),
     byID: (cityID) => axios.get(

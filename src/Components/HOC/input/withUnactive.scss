@@ -1,0 +1,25 @@
+$oceanBlue: #26abff;
+$lightGrey: #ececec;
+$darkGrey: #656565;
+$standartRadius: 8px;
+
+.input-field--unactive {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 240px;
+  height: 37px;
+  border-bottom: 2px solid $darkGrey;
+  font-weight: 300;
+  cursor: pointer;
+  border-radius: $standartRadius $standartRadius 0 0;
+  &-name {
+    color: $darkGrey;
+    margin-left: 25px;
+    font-size: 12px;
+  }
+  &-value {
+    color: $oceanBlue;
+    margin-right: 25px;
+  }
+}

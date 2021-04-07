@@ -1,7 +1,7 @@
 import './withError.scss'
 
 const withError = Component => (props) => {
-  const { additionalClassName, errors, name } = props
+  const { additionalClassName, errors = {}, name } = props
 
   return (
     <div className="template-wrapper">

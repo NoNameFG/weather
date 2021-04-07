@@ -1,15 +1,13 @@
 import './Input.scss'
 
-const DefaultInput = ({onChange, name, placeholder, type, additionalClassName, value}) => {
+const DefaultInput = ({ additionalClassName, ...rest}) => {
+  // const {additionalClassName, onChange, value, placeholder, type, name ...} = props
+
   return(
     <div className={`template-field${additionalClassName ? ' ' + additionalClassName : ''}`}>
       <input
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        type={type}
         className="template-field-input"
-        name={name}
+        { ...rest }
       />
     </div>
   )
