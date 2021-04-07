@@ -1,0 +1,37 @@
+$oceanBlue: #26abff;
+$standartRadius: 8px;
+
+
+.registration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: $oceanBlue;
+  &__template {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 350px;
+    height: 350px;
+    padding-top: 50px;
+    background: #fff;
+    border-radius: $standartRadius;
+    box-shadow: 0 0 15px rgba(0,0,0,0.25);
+    &-buttons-group {
+      margin-top: 53px;
+      &-button {
+        margin-right: 10px;
+      }
+    }
+    &-fields-group {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      .template-field {
+        margin-top: 5px;
+      }
+    }
+  }
+}

@@ -1,16 +1,26 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import './Login.scss'
-import DefaultInput from '../../DefaultComponents/Input/Input.jsx'
+import DefaultInput from './LoginInput/LoginInput.jsx'
 import DefaultButton from '../../DefaultComponents/Button/DefaultButton.jsx'
+import ErrorTemplate from './ErrorTemplate/ErrorTemplate.jsx'
 import { buttonTypes } from '../../DefaultComponents/Button/buttonTypes.js'
+import withHomeButton from '../../HOC/HomeButton/withHomeButton.jsx'
+import { api } from '../../../Services/Api.js'
+import { userLogin } from '../../../Redux/Actions/userLogin.js'
+import { setDefaultHeader } from '../../../Function/authentificationToken.js'
+
 
 const Login = () => {
-  const [ credentials, setCredentials ] = useState({
-    login: '',
-    password: ''
-  })
   const history = useHistory()
+  const dispatch = useDispatch()
+
+  const [ credentials, setCredentials ] = useState({
+    email: '123@gmail.com',
+    password: '12345678'
+  })
+  const [ errors, setErrors ] = useState({})
 
 
   const handleChange = e => {
@@ -18,10 +28,22 @@ const Login = () => {
       ...credentials,
       [e.target.name]: e.target.value
     })
+    setErrors({})
   }
 
-  const handleLogin = e => {
+  const handleLogin = async e => {
     e.preventDefault()
+    try {
+      const user = await api.login(credentials)
+      setDefaultHeader(user.headers.auth)
+      dispatch(userLogin(user.data))
+      history.push('/')
+    } catch (e) {
+      setErrors({
+        email: true,
+        password: true
+      })
+    }
   }
 
   const handleRedirectToRegistration = () => {
@@ -32,14 +54,17 @@ const Login = () => {
     <div className="login">
       <form className="login__template" onSubmit={handleLogin}>
 
+        <ErrorTemplate isOpen={errors.email} handleClose={() => setErrors({})}/>
+
         <div className="login__template-fields-group">
           <DefaultInput
-            value={credentials.login}
+            value={credentials.email}
             onChange={handleChange}
             type="text"
-            placeholder="Login"
-            name="login"
+            placeholder="Email"
+            name="email"
             additionalClassName="login__template-fields-group-input"
+            errors={errors}
           />
           <DefaultInput
             value={credentials.password}
@@ -47,6 +72,7 @@ const Login = () => {
             type="password"
             placeholder="Password"
             name="password"
+            errors={errors}
           />
         </div>
 
@@ -69,4 +95,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default withHomeButton(Login)

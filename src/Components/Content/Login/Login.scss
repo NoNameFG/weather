@@ -2,6 +2,7 @@ $oceanBlue: #26abff;
 $lightGrey: #ececec;
 $darkGrey: #656565;
 $standartRadius: 8px;
+$errorBackground: #d0312d;
 
 
 .login {
@@ -18,9 +19,52 @@ $standartRadius: 8px;
     width: 350px;
     height: 300px;
     padding-top: 100px;
+    position: relative;
     background: #fff;
     border-radius: $standartRadius;
     box-shadow: 0 0 15px rgba(0,0,0,0.25);
+    &-error {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 20px;
+      width: 250px;
+      padding: 10px;
+      border-radius: $standartRadius;
+      font-size: 10px;
+      background: $errorBackground;
+      box-shadow: 0 0 15px rgba(0,0,0,0.25);
+      color: #fff;
+      &-close {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 35px;
+        height: 20px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        svg {
+          width: 15px;
+          height: 15px;
+          fill: #fff;
+        }
+      }
+      &-sign {
+        width: 20px;
+        height: 20px;
+        padding-right: 15px;
+        svg {
+          width: 20px;
+          height: 20px;
+          fill: #fff;
+        }
+      }
+      &-description {
+        width: calc(100% - 35px);
+      }
+    }
     &-buttons-group {
       margin-top: 130px;
       &-button {

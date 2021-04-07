@@ -6,12 +6,23 @@ import Header from './Components/Header/Header.jsx'
 import WeatherWidgets from './Components/Content/WeatherWidgets/WeatherWidgets.jsx'
 import CityWeather from './Components/Content/CityWeather/CityWeather.jsx'
 import Login from './Components/Content/Login/Login.jsx'
+import Registration from './Components/Content/Registration/Registration.jsx'
 import { Switch, Route } from 'react-router-dom'
+import { setDefaultHeaderFromLocalStorage } from './Function/authentificationToken.js'
+import { api } from './Services/Api.js'
+import { userLogin } from './Redux/Actions/userLogin.js'
 
 function App() {
   const dispatch = useDispatch()
 
   useLayoutEffect(() => {
+    setDefaultHeaderFromLocalStorage()
+    const getUserData = async () => {
+      let data = await api.getProfile()
+      dispatch(userLogin(data.data))
+    }
+    getUserData()
+
     const cityList = JSON.parse(localStorage.getItem('cityList'))
     const weatherInformation = JSON.parse(localStorage.getItem('weatherInformation'))
     if(cityList && !weatherInformation.length){
@@ -32,6 +43,7 @@ function App() {
           <Login/>
         </Route>
         <Route path="/registration">
+          <Registration/>
         </Route>
       </Switch>
     </div>

@@ -5,10 +5,12 @@ import thunk from 'redux-thunk'
 
 //Reducers
 import { widgetsData } from '../Reducers/widgetsData.js'
+import { userData } from '../Reducers/userData.js'
 
 
 const allReducers = combineReducers({
-  widgetsData
+  widgetsData,
+  userData
 })
 
 const store = createStore(
