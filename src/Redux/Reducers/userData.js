@@ -1,4 +1,4 @@
-import { USER_LOGIN, USER_LOGOUT } from '../Constants/userConstants.js'
+import { USER_LOGIN, USER_LOGOUT, USER_UPDATE } from '../Constants/userConstants.js'
 import { createReducer } from './createReducer/createReducer.js'
 import PropTypes from 'prop-types'
 
@@ -23,7 +23,8 @@ const REDUCER_SCHEMA = {
 
 const reducerMap = {
   [USER_LOGIN]: (state, payload) => ({ ...payload, isLoggedin: true }),
-  [USER_LOGOUT]: () => ({ ...initialState, isLoggedin: false })
+  [USER_LOGOUT]: () => ({ ...initialState, isLoggedin: false }),
+  [USER_UPDATE]: (state, payload) => ({...state, ...payload})
 }
 
 export const userData = createReducer(reducerMap, initialState)

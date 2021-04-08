@@ -2,7 +2,7 @@ import { LoginIcon, LogoutIcon, ProfileIcon } from './ProfileIcon/ProfileIconCom
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearDefaultHeader } from '../../../Function/authentificationToken.js'
-import { userLogout } from '../../../Redux/Actions/userLogin.js'
+import { userLogout } from '../../../Redux/Actions/user.js'
 
 const ProfileInteraction = () => {
   const history = useHistory()

@@ -12,6 +12,35 @@ $errorBackground: #d0312d;
   width: 100vw;
   height: 100vh;
   background: $oceanBlue;
+  &__popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.5);
+    &-template {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 340px;
+      height: 170px;
+      padding-top: 70px;
+      border-radius: $standartRadius;
+      background: $lightGrey;
+      &-controll {
+        display: flex;
+        justify-content: space-between;
+        width: calc(100% - 50px);
+        padding: 0 25px;
+        margin-top: 70px;
+      }
+    }
+  }
   &__info, &__city-list {
     background: #fff;
     height: 400px;
@@ -27,7 +56,7 @@ $errorBackground: #d0312d;
       align-items: center;
       flex-direction: column;
       height: 230px;
-      padding: 50px;
+      padding: 50px 25px;
     }
     &-controll {
       display: flex;

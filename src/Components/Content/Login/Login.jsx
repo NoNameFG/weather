@@ -8,7 +8,7 @@ import ErrorTemplate from './ErrorTemplate/ErrorTemplate.jsx'
 import { buttonTypes } from '../../DefaultComponents/Button/buttonTypes.js'
 import withHomeButton from '../../HOC/HomeButton/withHomeButton.jsx'
 import { api } from '../../../Services/Api.js'
-import { userLogin } from '../../../Redux/Actions/userLogin.js'
+import { userLogin } from '../../../Redux/Actions/user.js'
 import { setDefaultHeader } from '../../../Function/authentificationToken.js'
 
 
