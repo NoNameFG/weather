@@ -1,11 +1,13 @@
 import { useDispatch } from 'react-redux'
 import { widgetSetDisplay } from '../../../../Redux/Actions/widgetSetDisplay.js'
+import { api } from '../../../../Services/Api.js'
 
 const CityItem = ({city, cityID, displayFlag}) => {
   const dispatch = useDispatch()
 
-  const handleClick = () => {
+  const handleClick = async () => {
     dispatch(widgetSetDisplay({cityID, displayFlag: !displayFlag}))
+    await api.city.update({cityID, settings: {displayFlag: !displayFlag}})
   }
 
   return(

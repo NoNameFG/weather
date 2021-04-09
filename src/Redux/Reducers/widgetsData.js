@@ -2,6 +2,7 @@ import {
     WIDGET_REMOVE_CITY_ID,
     WIDGET_MAKE_FAVORITE,
     WIDGET_SET_DISPLAY,
+    WIDGET_SET_MANY_SETTINGS,
     widgetWeatherAddDaily,
     widgetWeatherAddHourly,
     widgetWeatherAddWeekly,
@@ -234,6 +235,20 @@ const reducerFunctions = {
       }
     }
     return el
+  }),
+  widgetSetManySettings: (state, { settingsList }) => state.map(el => {
+    console.log(settingsList)
+    const cityData = settingsList.find(el2 => el2.cityID === el.dailyWeather.id)
+    if(cityData){
+      return {
+        ...el,
+        widgetSettings: {
+          ...el.widgetSettings,
+          ...cityData.settings
+        }
+      }
+    }
+    return el
   })
 }
 
@@ -257,10 +272,9 @@ const reducerMap = {
   [widgetWeatherAddWeekly.FULFILL]: (state, { index }) => reducerFunctions.weatherFulfill(state, { index, weatherType: weatherTypes.weeklyWeather }),
 
   [WIDGET_REMOVE_CITY_ID]: (state, { cityID }) => (state.filter(el => el.dailyWeather.id !== cityID)),
-
   [WIDGET_MAKE_FAVORITE]: (state, { cityID, isFavorite }) => reducerFunctions.widgetMakeFavorite(state, { cityID, isFavorite }),
-
   [WIDGET_SET_DISPLAY]: (state, { cityID, displayFlag }) => reducerFunctions.widgetSetDisplay(state, { cityID, displayFlag }),
+  [WIDGET_SET_MANY_SETTINGS]: (state, { settingsList }) => reducerFunctions.widgetSetManySettings(state, { settingsList }),
 
   [widgetWeatherAddManyDaily.REQUEST]: (state, { idList }) => reducerFunctions.weatherRequestMany(state, { idList, weatherType: weatherTypes.dailyWeather }),
   [widgetWeatherAddManyDaily.SUCCESS]: (state, { weatherDataList }) => reducerFunctions.weatherSuccessMany(state, { weatherDataList, weatherType: weatherTypes.dailyWeather }),

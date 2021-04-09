@@ -1,5 +1,6 @@
 import { widgetWeatherAddMany, widgetWeatherAddManyDaily, widgetWeatherAddManyHourly, widgetWeatherAddManyWeekly } from '../Actions/widgetWeatherAddMany.js'
 import { weatherTypes } from '../Reducers/widgetsData.js'
+import { widgetSetManySettings } from '../Actions/widgetSetManySettings.js'
 
 import weatherApi from '../../Services/WeatherAPI.js'
 
@@ -44,7 +45,13 @@ const fulfillALl = dispatch => {
 
 }
 
-export const addManyCityData = ({ idList }) => {
+const setSettingsIfLoggedin = async (dispatch, settingsList) => {
+  if(settingsList){
+    dispatch(widgetSetManySettings({settingsList}))
+  }
+}
+
+export const addManyCityData = ({ idList, settingsList }) => {
   return (dispatch) => {
     dispatch(widgetWeatherAddManyDaily.REQUEST({ idList }))
 
@@ -54,7 +61,10 @@ export const addManyCityData = ({ idList }) => {
       .catch(e => dailyErrorProcess(e, dispatch))
       .then(data => hourlyWeeklyProcess(data, dispatch))
       .catch(e => hourlyWeeklyErrorProcess(e, dispatch))
-      .finally(() => fulfillALl(dispatch))
+      .finally(() => {
+        fulfillALl(dispatch)
+        setSettingsIfLoggedin(dispatch, settingsList)
+      })
 
   }
 }

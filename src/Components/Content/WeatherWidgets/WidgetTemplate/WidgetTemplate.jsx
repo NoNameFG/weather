@@ -4,15 +4,18 @@ import WeekPage from './WeekPage/WeekPage.jsx'
 import DayPage from './DayPage/DayPage.jsx'
 import WidgetRangeButton from './WidgetRangeButton.jsx'
 import Preloader from '../../../Preloader/Preloader.jsx'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { widgetRemoveCityID } from '../../../../Redux/Actions/widgetRemoveCityID.js'
 import { removeFromLocalStorage } from '../../../../Function/manipulateCityLocStor.js'
 import { DAY, WEEK, HOURLY } from '../../../../Constants/RangeTypes.js'
+import { api } from '../../../../Services/Api.js'
 
 
 const WidgetTemplate = ({ dailyWeather, hourlyWeather, weeklyWeather, widgetSettings }) => {
-  const [ section, setSection ] = useState(DAY)
   const dispatch = useDispatch()
+  const isLoggedin = useSelector(state => state.userData.isLoggedin)
+
+  const [ section, setSection ] = useState(DAY)
 
   const content = () => {
     switch (section) {
@@ -31,8 +34,11 @@ const WidgetTemplate = ({ dailyWeather, hourlyWeather, weeklyWeather, widgetSett
     }
   }
 
-  const removeWidget = () => {
-    dispatch(widgetRemoveCityID({cityID: dailyWeather.id}))
+  const removeWidget = async () => {
+    if(isLoggedin){
+      await api.city.delete({ cityID: dailyWeather.id })
+    }
+    dispatch(widgetRemoveCityID({ cityID: dailyWeather.id }))
     removeFromLocalStorage(dailyWeather.id)
   }
 

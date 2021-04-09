@@ -2,9 +2,9 @@ import { addToLocalStorage } from '../../Function/manipulateCityLocStor.js'
 import { widgetWeatherAddDaily, widgetWeatherAddHourly, widgetWeatherAddWeekly } from '../Actions/widgetWeatherAdd.js'
 import { weatherTypes } from '../Reducers/widgetsData.js'
 import weatherApi from '../../Services/WeatherAPI.js'
+import { api } from '../../Services/Api.js'
 
-
-const dailyProcess = (dispatch, index, data, existCities) => {
+const dailyProcess = (dispatch, index, data, existCities, isLoggedin) => {
   if(!existCities.some(el => el.dailyWeather.id === data.id)){
     dispatch(widgetWeatherAddDaily.SUCCESS({
       weatherData: data,
@@ -13,10 +13,18 @@ const dailyProcess = (dispatch, index, data, existCities) => {
     addToLocalStorage(data.id)
     dispatch(widgetWeatherAddHourly.REQUEST({ index }))
     dispatch(widgetWeatherAddWeekly.REQUEST({ index }))
-    return Promise.all([
+
+    console.log(isLoggedin)
+
+    const promiseList = [
       weatherApi.getHourlyWeather(data.coord),
       weatherApi.getWeeklyWeather(data.coord)
-    ])
+    ]
+    if(isLoggedin){
+      promiseList.push(api.city.add({cityID: data.id}))
+    }
+
+    return Promise.all(promiseList)
   } else {
     throw new Error('City is already exist')
   }
@@ -64,12 +72,12 @@ const fulfillALl = (dispatch, index) => {
 
 }
 
-export const addNewCity = ({ index, city, existCities }) => {
+export const addNewCity = ({ index, city, existCities, isLoggedin }) => {
   return (dispatch) => {
     dispatch(widgetWeatherAddDaily.REQUEST({ index }))
 
     return weatherApi.getCurrentWeather(city)
-      .then(data => dailyProcess(dispatch, index, data, existCities))
+      .then(data => dailyProcess(dispatch, index, data, existCities, isLoggedin))
       .catch(e => dailyErrorProccess(dispatch, index, e))
       .then(data => hourlyWeeklyProcess(dispatch, index, data))
       .catch(e => hourlyWeeklyErrorProcess(dispatch, index, e))

@@ -1,5 +1,5 @@
 import { useLayoutEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addManyCityData } from './Redux/Thunk/addManyCityData.js'
 import './App.scss';
 import Header from './Components/Header/Header.jsx'
@@ -9,15 +9,14 @@ import Login from './Components/Content/Login/Login.jsx'
 import Registration from './Components/Content/Registration/Registration.jsx'
 import Profile from './Components/Content/Profile/Profile.jsx'
 import { Switch, Route } from 'react-router-dom'
-// import { setDefaultHeaderFromLocalStorage } from './Function/authentificationToken.js'
 import { api } from './Services/Api.js'
 import { userLogin } from './Redux/Actions/user.js'
 
 function App() {
   const dispatch = useDispatch()
+  const isLoggedin = useSelector(state => state.userData.isLoggedin)
 
   useLayoutEffect(() => {
-    // setDefaultHeaderFromLocalStorage()
     const getUserData = async () => {
       let data = await api.getProfile()
       if(localStorage.getItem('auth'))
@@ -25,11 +24,23 @@ function App() {
     }
     getUserData()
 
-    const cityList = JSON.parse(localStorage.getItem('cityList'))
-    const weatherInformation = JSON.parse(localStorage.getItem('weatherInformation'))
-    if(cityList && !weatherInformation.length){
-      dispatch(addManyCityData({idList: cityList}))
+
+    const getManyWeatherData = async () => {
+      const localCityList = JSON.parse(localStorage.getItem('cityList'))
+      let savedCityList, settingsList = []
+      if(isLoggedin){
+        settingsList = await api.city.getList()
+        savedCityList = settingsList.data.map(el => el.cityID)
+      }
+
+      const weatherInformation = JSON.parse(localStorage.getItem('weatherInformation'))
+      if((localCityList || savedCityList) && !weatherInformation.length){
+        dispatch(addManyCityData({idList: localCityList || savedCityList, settingsList: settingsList.data}))
+      }
     }
+
+    getManyWeatherData()
+
   })
 
   return (

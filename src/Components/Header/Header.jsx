@@ -8,13 +8,14 @@ import ProfileInteraction from './ProfileInteraction/ProfileIntercation.jsx'
 
 const Header = () => {
   const [ city, setCity ] = useState('')
-  const existCities = useSelector(state => state.widgetsData)
+  const {existCities, isLoggedin} = useSelector(state => ({existCities: state.widgetsData, isLoggedin: state.userData.isLoggedin}))
 
   const dispatch = useDispatch()
 
   const addCity = async e => {
     e.preventDefault()
-    dispatch(addNewCity({ index: existCities.length, city, existCities }))
+
+    dispatch(addNewCity({ index: existCities.length, city, existCities, isLoggedin }))
     setCity('')
   }
 

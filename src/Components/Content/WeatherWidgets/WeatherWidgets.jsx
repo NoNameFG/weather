@@ -11,7 +11,7 @@ const WeatherWidgets = () => {
   const widgetList = cityList.map(el => (
     (!el.dailyWeather.error && el.widgetSettings.displayFlag) &&
       <WidgetTemplate
-        key={ 'widget-' + el.widgetSettings.uniqeKey }
+        key={ 'widget-' + new Date(el.widgetSettings.creationDate).getTime() }
         { ...el }
       />
   ))
