@@ -14,8 +14,6 @@ const dailyProcess = (dispatch, index, data, existCities, isLoggedin) => {
     dispatch(widgetWeatherAddHourly.REQUEST({ index }))
     dispatch(widgetWeatherAddWeekly.REQUEST({ index }))
 
-    console.log(isLoggedin)
-
     const promiseList = [
       weatherApi.getHourlyWeather(data.coord),
       weatherApi.getWeeklyWeather(data.coord)

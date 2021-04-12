@@ -5,17 +5,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addNewCity } from '../../Redux/Thunk/addNewCity.js'
 import WidgetNavigation from './WidgetNavigation/WidgetNavigation.jsx'
 import ProfileInteraction from './ProfileInteraction/ProfileIntercation.jsx'
+import { addNewCityAction } from '../../Redux/Saga/Actions/addNewCityAction.js'
 
 const Header = () => {
   const [ city, setCity ] = useState('')
-  const {existCities, isLoggedin} = useSelector(state => ({existCities: state.widgetsData, isLoggedin: state.userData.isLoggedin}))
+  // const {existCities, isLoggedin} = useSelector(state => ({existCities: state.widgetsData, isLoggedin: state.userData.isLoggedin}))
 
   const dispatch = useDispatch()
 
   const addCity = async e => {
     e.preventDefault()
 
-    dispatch(addNewCity({ index: existCities.length, city, existCities, isLoggedin }))
+    // dispatch(addNewCityAction({ index: existCities.length, city, existCities, isLoggedin }))
+    dispatch(addNewCityAction({ city }))
     setCity('')
   }
 
