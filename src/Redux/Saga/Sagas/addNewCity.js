@@ -2,7 +2,7 @@ import { addToLocalStorage } from '../../../Function/manipulateCityLocStor.js'
 import { widgetWeatherAddDaily, widgetWeatherAddHourly, widgetWeatherAddWeekly } from '../../Actions/widgetWeatherAdd.js'
 import weatherApi from '../../../Services/WeatherAPI.js'
 import { api } from '../../../Services/Api.js'
-import { call, put, select } from 'redux-saga/effects'
+import { call, put, select, all } from 'redux-saga/effects'
 
 
 
@@ -73,11 +73,13 @@ function* addNewCity(action){
     existCities: state.widgetsData,
     index: state.widgetsData.length
   }))
-  
+
   try {
     const dataDaily = yield call(dailyProcess, {index, city, existCities, isLoggedin})
-    yield call(hourlyProccess, { index, dataDaily })
-    yield call(weeklyProccess, { index, dataDaily })
+    yield all([
+      call(hourlyProccess, { index, dataDaily }),
+      call(weeklyProccess, { index, dataDaily })
+    ])
   } catch (error) {
     yield call(errorsProccess, { index, error })
   } finally {

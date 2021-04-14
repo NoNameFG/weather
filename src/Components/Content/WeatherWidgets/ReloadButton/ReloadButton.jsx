@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux'
 import { addManyCityData } from '../../../../Redux/Thunk/addManyCityData.js'
+import { addManyCityDataAction } from '../../../../Redux/Saga/Actions/addManyCityDataAction.js'
 
 
 const ReloadButton = () => {
@@ -8,7 +9,7 @@ const ReloadButton = () => {
   const handleClick = () => {
     const cityList = JSON.parse(localStorage.getItem('cityList'))
     if(cityList){
-      dispatch(addManyCityData({idList: cityList}))
+      dispatch(addManyCityDataAction({idList: cityList}))
     }
   }
 

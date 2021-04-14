@@ -159,7 +159,7 @@ const reducerFunctions = {
         obj.widgetSettings = {
           displayFlag: true,
           isFavorite: false,
-          uniqeKey: `${new Date().getTime()}_${index}`
+          creationDate: new Date(Date.now() + index)
         }
       }
       return obj
@@ -237,7 +237,6 @@ const reducerFunctions = {
     return el
   }),
   widgetSetManySettings: (state, { settingsList }) => state.map(el => {
-    console.log(settingsList)
     const cityData = settingsList.find(el2 => el2.cityID === el.dailyWeather.id)
     if(cityData){
       return {

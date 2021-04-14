@@ -176,17 +176,17 @@ const weatherApi = {
   },
 
   getDailyDataList: async function({ idList }){
-    const promiseList = idList.map(el => this.getCurrentWeatherByCityID(el))
+    const promiseList = idList.map(el => weatherApi.getCurrentWeatherByCityID(el))
     const data = await Promise.all(promiseList)
     return data
   },
   getHourlyDataList: async function({ coordList }){
-    const promiseList = coordList.map(el => this.getHourlyWeather(el))
+    const promiseList = coordList.map(el => weatherApi.getHourlyWeather(el))
     const data = await Promise.all(promiseList)
     return data
   },
   getWeeklyDataList: async function({ coordList }){
-    const promiseList = coordList.map(el => this.getWeeklyWeather(el))
+    const promiseList = coordList.map(el => weatherApi.getWeeklyWeather(el))
     const data = await Promise.all(promiseList)
     return data
   },

@@ -1,6 +1,7 @@
 import { useLayoutEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addManyCityData } from './Redux/Thunk/addManyCityData.js'
+import { addManyCityDataAction } from './Redux/Saga/Actions/addManyCityDataAction.js'
 import './App.scss';
 import Header from './Components/Header/Header.jsx'
 import WeatherWidgets from './Components/Content/WeatherWidgets/WeatherWidgets.jsx'
@@ -18,9 +19,11 @@ function App() {
 
   useLayoutEffect(() => {
     const getUserData = async () => {
-      let data = await api.getProfile()
-      if(localStorage.getItem('auth'))
-      dispatch(userLogin(data.data))
+      if(isLoggedin){
+        let data = await api.getProfile()
+        if(localStorage.getItem('auth'))
+        dispatch(userLogin(data.data))
+      }
     }
     getUserData()
 
@@ -35,7 +38,8 @@ function App() {
 
       const weatherInformation = JSON.parse(localStorage.getItem('weatherInformation'))
       if((localCityList || savedCityList) && !weatherInformation.length){
-        dispatch(addManyCityData({idList: localCityList || savedCityList, settingsList: settingsList.data}))
+        // dispatch(addManyCityData({idList: localCityList || savedCityList, settingsList: settingsList.data}))
+        dispatch(addManyCityDataAction({idList: localCityList || savedCityList, settingsList: settingsList.data}))
       }
     }
 
